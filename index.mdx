@@ -1,97 +1,108 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Overview"
+description: "A simple, open format for giving agents scheduled workflows and event-driven automation."
 ---
 
-## Setting up
+Agent Events are folders containing event definitions, schedules, and resources that agents can discover and execute automatically on a time-based or trigger-based schedule.
 
-Get your documentation site up and running in minutes.
+## Why Agent Events?
+
+Agents are increasingly capable, but typically operate in request-response mode without the ability to schedule future actions or maintain long-running workflows. Agent Events solve this by giving agents a standardized way to define, discover, and execute time-based and event-driven workflows.
+
+<CardGroup cols={3}>
+  <Card title="For event authors" icon="pencil">
+    Build scheduled workflows once and deploy them across multiple agent products.
+  </Card>
+  <Card title="For compatible agents" icon="robot">
+    Support for events lets end users give agents autonomous, scheduled capabilities out of the box.
+  </Card>
+  <Card title="For teams and enterprises" icon="building">
+    Capture organizational workflows in portable, version-controlled, auditable packages.
+  </Card>
+</CardGroup>
+
+## What can Agent Events enable?
+
+<AccordionGroup>
+  <Accordion title="Scheduled workflows" icon="calendar">
+    Daily reports, weekly summaries, monthly reviews - all automated on a cron-like schedule.
+  </Accordion>
+  <Accordion title="Proactive monitoring" icon="chart-line">
+    Check system health, scan for issues, send alerts when thresholds are exceeded.
+  </Accordion>
+  <Accordion title="Recurring tasks" icon="repeat">
+    Team status emails, standup reminders, ticket triage - consistent and on time.
+  </Accordion>
+  <Accordion title="Event-driven automation" icon="bolt">
+    React to external triggers like CI/CD failures, customer tickets, or calendar events.
+  </Accordion>
+  <Accordion title="Interoperability" icon="arrows-rotate">
+    Reuse the same event across different event-compatible agent products.
+  </Accordion>
+</AccordionGroup>
+
+## Adoption
+
+Agent Events is a new open standard. We're actively seeking early adopters, contributors, and partners to help shape the future of event-driven AI agents.
+
+<CardGroup cols={2}>
+  <Card title="Be an early adopter" icon="rocket">
+    Integrate Agent Events into your agent platform and help define the standard.
+  </Card>
+  <Card title="Contribute" icon="code-pull-request">
+    Help us improve the specification, documentation, and tooling.
+  </Card>
+</CardGroup>
+
+## Open development
+
+<Info>
+The Agent Events format was originally conceived by [Krisi Hadjiev](mailto:krisihadjiev@gmail.com) and released as an open standard. We believe scheduled, event-driven workflows are essential for the next generation of AI agents.
+</Info>
+
+This is an early-stage project and we're open to:
+- **Ideas** - Help us shape the specification
+- **Contributors** - Improve docs, tooling, and examples
+- **Adopters** - Integrate Agent Events into your platform
+- **Partners** - Collaborate on the future of agentic automation
 
 <Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
+  title="View on GitHub"
+  icon="github"
+  href="https://github.com/HadjievK/agentevents"
 >
-  Follow our three step quickstart guide.
+  Explore the specification, contribute, or open an issue.
 </Card>
 
-## Make it yours
+## Get started
 
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
+<CardGroup cols={2}>
   <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
+    title="What are events?"
+    icon="circle-question"
+    href="/quickstart"
   >
-    Edit your docs locally and preview them in real time.
+    Learn about events, how they work, and why they matter.
   </Card>
   <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
-  </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
+    title="Specification"
+    icon="file-code"
     href="/api-reference/introduction"
   >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
-
-## Create beautiful pages
-
-Everything you need to create world-class documentation.
-
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
+    The complete format specification for event.yaml files.
   </Card>
   <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
+    title="Integrate events"
+    icon="plug"
+    href="/development"
   >
-    Add sample code to demonstrate how to use your product.
+    Add event support to your agent or tool.
   </Card>
   <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
+    title="Example events"
+    icon="folder-open"
+    href="https://github.com/HadjievK/agentevents/tree/main/examples"
   >
-    Display images and other media.
+    Browse example events on GitHub.
   </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
-
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+</CardGroup>
