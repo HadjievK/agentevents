@@ -514,6 +514,58 @@ footer {
     color: white;
 }
 
+/* Event Types Section */
+.event-types {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.event-type-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid var(--color-border);
+    transition: all 0.2s ease;
+}
+
+.event-type-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.event-type-card h3 {
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+}
+
+.event-type-card p {
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+}
+
+.event-type-card strong {
+    color: var(--color-text);
+}
+
+.event-type-card .code-block {
+    margin: 1rem 0;
+}
+
+.event-type-card .code-block pre {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.event-use-case {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero h1 {
