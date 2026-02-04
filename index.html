@@ -95,15 +95,15 @@
                         <span>Event folder layout</span>
                     </div>
                     <pre><code>events/
-└── team-status-mail/
-    ├── event.yaml          # Event definition (required)
+└── &lt;event-name&gt;/
+    ├── EVENT.MD         # Event definition (required)
+    ├── scripts/            # Optional: bundled scripts
+    ├── references/         # Optional: bundled references
     ├── skills/             # Optional: bundled skills
-    │   ├── mail-compose/
-    │   │   └── SKILL.md
-    │   └── team-context/
+    │   └── &lt;skill-name&gt;/
     │       └── SKILL.md
-    └── assets/             # Optional: templates, data
-        └── email-template.html</code></pre>
+    └── assets/             # Optional: templates, data files
+        └── templates/</code></pre>
                 </div>
 
                 <h3>Key Concepts</h3>
