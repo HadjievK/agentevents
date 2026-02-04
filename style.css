@@ -825,9 +825,9 @@ footer {
 /* Protocol Synergy Highlight Section */
 .synergy-highlight-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
-    max-width: 1000px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+    max-width: 1200px;
     margin: 0 auto;
 }
 
