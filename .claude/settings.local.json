@@ -15,7 +15,8 @@
       "Bash(git commit:*)",
       "Bash(powershell -Command \"$word = New-Object -ComObject Word.Application; $doc = $word.Documents.Open\\(''C:\\\\Users\\\\I535106\\\\Desktop\\\\EDA\\\\Spec\\\\Еvent-Driven Agents.docx''\\); $doc.Content.Text; $doc.Close\\(\\); $word.Quit\\(\\)\")",
       "Bash(copy:*)",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
