@@ -1,0 +1,101 @@
+name: system-health-check
+description: Monitor application health and alert on anomalies
+schedule: "*/15 * * * *"
+enabled: true
+
+instruction: |
+  Monitor production system health and create incidents when thresholds are exceeded.
+  
+  **Metrics to check:**
+  
+  1. **Application Performance**
+     - Response time: p50, p95, p99
+     - Error rate: 4xx and 5xx responses
+     - Request throughput: requests per minute
+     - Database query time: slow query threshold
+  
+  2. **Infrastructure Health**
+     - CPU usage: per instance and cluster average
+     - Memory usage: available RAM, swap usage
+     - Disk space: available capacity on all volumes
+     - Network: bandwidth utilization, packet loss
+  
+  3. **Service Dependencies**
+     - Database connectivity: connection pool status
+     - Redis cache: hit rate, eviction rate
+     - External APIs: response times, availability
+     - Message queues: queue depth, processing rate
+  
+  **Alert Thresholds:**
+  
+  | Metric | Warning | Critical |
+  |--------|---------|----------|
+  | Response time p95 | >500ms | >1000ms |
+  | Error rate | >0.5% | >1% |
+  | CPU usage | >70% | >85% |
+  | Memory usage | >80% | >90% |
+  | Disk space | <20% free | <10% free |
+  | DB connections | >80% | >95% |
+  
+  **When threshold exceeded:**
+  
+  1. **Gather context:**
+     - Recent deployments (last 2 hours)
+     - Error logs with stack traces (last 15 minutes)
+     - Similar incidents (last 7 days)
+     - Current load vs. historical baseline
+  
+  2. **Analyze root cause:**
+     - Check for deployment correlation
+     - Look for traffic spikes or DDoS patterns
+     - Identify failing endpoints or queries
+     - Check for resource exhaustion
+  
+  3. **Create PagerDuty incident:**
+     - Priority based on threshold (Warning = P3, Critical = P2)
+     - Title: "[Service] [Metric] exceeded threshold"
+     - Description: Include context, logs, graphs
+     - Suggested remediation steps
+     - Link to runbook if available
+  
+  4. **Post to #incidents Slack channel:**
+     ```
+     🚨 [P2] Production Performance Degradation
+     
+     📊 Metric: API response time p95 = 1,234ms (threshold: 1,000ms)
+     ⏰ Duration: 5 minutes
+     🔗 PagerDuty: [incident link]
+     📈 Grafana: [dashboard link]
+     
+     🔍 Likely cause: Database slow queries after deploy #1234
+     ✅ Suggested action: Rollback deploy or add index to users table
+     ```
+  
+  **Recovery notification:**
+  When metric returns to normal for 3 consecutive checks:
+  - Resolve PagerDty incident automatically
+  - Post recovery message to #incidents
+  - Include: duration, root cause, resolution
+  
+  **False positive prevention:**
+  - Ignore transient spikes (<2 minutes)
+  - Use moving average over 5-minute window
+  - Suppress duplicate alerts (same metric + service)
+  - Honor maintenance windows (no alerts during deploys)
+
+skills:
+  - metrics-analysis
+  - log-parser
+  - pagerduty-integration
+  - slack-notify
+
+metadata:
+  author: sre-team
+  version: "2.1.0"
+  tags:
+    - monitoring
+    - alerting
+    - health-check
+
+max_retries: 3
+timeout: 60
