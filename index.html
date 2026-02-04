@@ -88,29 +88,6 @@
         <section id="specification" class="section">
             <div class="container">
                 <h2>Event Specification</h2>
-                <p class="section-intro">An event is a directory containing an <code>event.yaml</code> file that defines when and how to execute:</p>
-                
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>event.yaml</span>
-                    </div>
-                    <pre><code>name: team-status-mail
-description: Send a daily status email to the team
-schedule: "*/10 * * * *"  # Every 10 minutes (cron format)
-enabled: true
-
-skills:
-  - mail-compose
-  - team-context
-
-instruction: |
-  Draft and send a brief status email to the team with:
-  - Today's key accomplishments
-  - Current blockers
-  - Tomorrow's priorities
-  
-  Use the team distribution list in team-context skill.</code></pre>
-                </div>
 
                 <h3>Directory Structure</h3>
                 <div class="code-block">
