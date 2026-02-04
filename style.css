@@ -755,8 +755,14 @@ footer {
 }
 
 .protocol-icon {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
     margin-bottom: var(--spacing-sm);
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(91, 91, 214, 0.1), rgba(139, 92, 246, 0.1));
+    border-radius: 8px;
+    display: inline-block;
 }
 
 .protocol-card h3 {
