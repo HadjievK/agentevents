@@ -140,6 +140,7 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: var(--spacing-md);
+    text-align: center;
 }
 
 .section h3 {
@@ -363,6 +364,15 @@ code {
     margin: 0 auto var(--spacing-md);
     text-align: center;
     opacity: 0.95;
+}
+
+.cta-text a {
+    color: white;
+    text-decoration: underline;
+}
+
+.cta-text a:hover {
+    opacity: 0.8;
 }
 
 .cta-buttons {
