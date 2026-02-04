@@ -154,8 +154,9 @@ body {
     font-size: 1.125rem;
     color: var(--color-text-light);
     max-width: 800px;
-    margin-bottom: var(--spacing-md);
+    margin: 0 auto var(--spacing-md);
     line-height: 1.7;
+    text-align: center;
 }
 
 /* Benefits Grid */
