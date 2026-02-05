@@ -66,7 +66,7 @@ events/
 ```
 ### EVENT.MD Format
 
-The EVENT.MD file is a markdown document containing event metadata and instructions:
+The EVENT.md file must contain YAML frontmatter followed by Markdown content:
 
 ```markdown
 ---
