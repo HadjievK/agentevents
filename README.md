@@ -2,13 +2,12 @@
 
 **Schedule the Future with Event-Driven AI Agents**
 
-Agent Events is an open format for giving AI agents scheduled workflows and event-driven automation. Define what should happen, when it should happen, and let agents handle the execution.
-
+Agent Events is an open format for giving AI agents scheduled workflows and event-driven automation.
 🌐 **Website:** [agentevents.io](https://agentevents.io)
 
 ## Overview
 
-Agent Events are folders containing event definitions, skills, and schedules that agents can discover and execute automatically. They enable agents to:
+Agent Events are folders containing event definitions, scripts(optional),references(optional), assets(optional) and schedules that agents can discover and execute automatically. They enable agents to:
 
 - **Run scheduled workflows** - Daily reports, weekly summaries, recurring tasks
 - **Monitor proactively** - System health checks, alert thresholds, anomaly detection
@@ -65,28 +64,35 @@ events/
     └── assets/             # Optional: templates, data files
         └── templates/
 ```
+### EVENT.MD Format
 
-### event.yaml Schema
+The EVENT.MD file is a markdown document containing event metadata and instructions:
 
-```yaml
-# Required fields
-name: string                 # Unique event identifier
-description: string          # Human-readable description
-schedule: string             # Cron format schedule
-enabled: boolean             # Enable/disable execution
+```markdown
+---
+name: event-name
+description: Brief description of what this event does
+schedule: "0 9 * * MON-FRI"
+enabled: true
+---
 
-# Optional fields
-skills: string[]             # Skills to load (local or global)
-instruction: string          # Natural language task description
-metadata:                    # Custom metadata
-  author: string
-  version: string
-  tags: string[]
+# Event Instructions
 
-# Advanced options
-max_retries: integer         # Retry failed executions (default: 3)
-timeout: integer             # Max execution time in seconds
-dependencies: string[]       # Other events that must succeed first
+Natural language instructions for the agent describing:
+- What task to perform
+- When to execute (schedule above)
+- What skills or tools to use
+- Expected outputs or actions
+
+## Skills
+
+Optional reference to skills (from bundled skills/ directory or global):
+- skill-name-1
+- skill-name-2
+
+## Additional Context
+
+Any additional context, examples, or guidelines for execution.
 ```
 
 ### Schedule Format
@@ -148,100 +154,10 @@ Events can leverage Model Context Protocol (MCP) servers for external integratio
 - **Messaging** - Post to Slack, Teams, Discord
 - **APIs** - Call any HTTP API with authentication
 
-## Reference Implementation
-
-The **AEP Agent** is a complete reference implementation featuring:
-
-- **Gradio UI** - Web interface for managing events
-- **Claude Integration** - Uses Claude Sonnet 4 for intelligent execution
-- **Event Engine** - Background scheduler with cron support
-- **MCP Servers** - Mail, calendar, ITSM integrations
-- **Execution History** - Full audit trail with logs
-
-### Architecture Diagram
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                         Gradio UI                           │
-│  ┌──────────┐  ┌──────────┐  ┌──────────────────────────┐  │
-│  │ Events   │  │ History  │  │ Chat with Claude         │  │
-│  │ Manager  │  │ Viewer   │  │ (Test events manually)   │  │
-│  └──────────┘  └──────────┘  └──────────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                           ↓
-┌─────────────────────────────────────────────────────────────┐
-│                      Event Engine                           │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │ Scheduler (cron)                                     │   │
-│  │ - Scans events/ directory                            │   │
-│  │ - Maintains schedule for enabled events              │   │
-│  │ - Fires events at scheduled times                    │   │
-│  └──────────────────────────────────────────────────────┘   │
-│                           ↓                                  │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │ Event Executor                                        │   │
-│  │ - Loads event definition                             │   │
-│  │ - Loads referenced skills                            │   │
-│  │ - Calls Claude API with instruction + skills + tools │   │
-│  │ - Executes tool calls (MCP servers)                  │   │
-│  │ - Logs results to event_log/                         │   │
-│  └──────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-                           ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    Claude API (Sonnet 4)                    │
-│  - Reads instruction                                        │
-│  - Applies skills                                           │
-│  - Returns tool calls                                       │
-└─────────────────────────────────────────────────────────────┘
-                           ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    MCP Tool Servers                         │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────────┐  │
-│  │ Mail     │  │ Calendar │  │ ITSM     │  │ Custom     │  │
-│  │ (Graph)  │  │ (Google) │  │ (SAP)    │  │ Tools      │  │
-│  └──────────┘  └──────────┘  └──────────┘  └────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### File Structure
-
-```
-aep-agent/
-├── main.py                 # Gradio UI + Claude integration
-├── event_engine.py         # Event scheduler and executor
-├── start.py                # Entry point (handles Windows UTF-8)
-├── requirements.txt        # Python dependencies
-├── .env                    # Configuration (API keys, etc.)
-│
-├── events/                 # Event definitions
-│   └── send-team-mail/
-│       ├── event.yaml
-│       └── skills/
-│           └── mail-compose/
-│               └── SKILL.md
-│
-├── event_log/              # Execution history
-│   └── YYYY-MM-DD.jsonl    # Daily log files
-│
-└── mcp_servers/            # MCP server implementations
-    ├── mail_server.py      # Microsoft Graph integration
-    ├── calendar_server.py  # Google Calendar integration
-    └── itsm_server.py      # SAP Cloud ALM integration
-```
-
 
 ## Contributing
 
-We welcome contributions! Areas where help is needed:
-
-- **Skill library:** Create reusable skills for common tasks
-- **MCP servers:** Integrate with more external services
-- **Agent integrations:** Add Agent Events support to other platforms
-- **Documentation:** Tutorials, guides, examples
-- **Testing:** Edge cases, performance, reliability
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+We welcome contributions!
 
 ## Community
 
