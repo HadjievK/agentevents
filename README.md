@@ -115,45 +115,13 @@ Uses standard cron syntax:
 - `0 */4 * * *` - Every 4 hours
 - `0 16 * * FRI` - Fridays at 4 PM
 
-## Architecture
+## Example Implementation
 
-### Event Engine
+For a complete working example of an event-driven agent implementation, see:
 
-The Event Engine is responsible for:
+**[Event-Driven Agent Example](https://github.com/HadjievK/event-driven-agent)**
 
-1. **Discovery** - Scan event directories and parse `event.yaml` files
-2. **Scheduling** - Maintain cron-based schedule for each enabled event
-3. **Execution** - When an event fires:
-   - Load referenced skills (if any)
-   - Pass instruction + skills to agent
-   - Execute agent response (tool calls)
-   - Log execution and results
-4. **State Management** - Track execution history, maintain event context
-
-### Integration with Agent Skills
-
-Agent Events work seamlessly with [Agent Skills](https://agentskills.io):
-
-- **Skills provide capabilities** - PDF processing, mail sending, data analysis
-- **Events orchestrate execution** - When to use which skills, with what context
-- **Progressive loading** - Skills only loaded when event needs them
-
-```yaml
-# Event references skills
-skills:
-  - mail-compose      # Global skill from .claude/skills/
-  - ./custom-skill    # Local skill in events/<name>/skills/
-```
-
-### Tool Integration (MCP)
-
-Events can leverage Model Context Protocol (MCP) servers for external integrations:
-
-- **Mail** - Send emails via Microsoft Graph, SMTP, or other providers
-- **Calendar** - Read/write calendar events
-- **Messaging** - Post to Slack, Teams, Discord
-- **APIs** - Call any HTTP API with authentication
-
+This repository demonstrates a full agent implementation with event discovery, scheduling, and execution capabilities.
 
 ## Contributing
 
