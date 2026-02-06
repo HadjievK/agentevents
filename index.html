@@ -27,9 +27,9 @@
                 </a>
                 <div class="nav-links">
                     <a href="#overview">Overview</a>
-                    <a href="#specification">Specification</a>
                     <a href="#event-types">Event Types</a>
                     <a href="#examples">Examples</a>
+                    <a href="#specification">Specification</a>
                     <a href="https://github.com/HadjievK/agentevents" target="_blank" class="github-link">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
@@ -130,155 +130,152 @@
             </div>
         </section>
 
-        <section id="specification" class="section">
-            <div class="container">
-                <h2>Event Specification</h2>
-
-                <h3>Directory Structure</h3>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>Event folder layout</span>
-                    </div>
-                    <pre><code>events/
-└── &lt;event-name&gt;/
-    ├── EVENT.MD         # Event definition (required)
-    ├── scripts/            # Optional: bundled scripts
-    ├── references/         # Optional: bundled references
-    ├── skills/             # Optional: bundled skills
-    │   └── &lt;skill-name&gt;/
-    │       └── SKILL.md
-    └── assets/             # Optional: templates, data files
-        └── templates/</code></pre>
-                </div>
-
-                <h3>Key Concepts</h3>
-                <div class="concept-grid">
-                    <div class="concept-card">
-                        <h4>Schedule</h4>
-                        <p>Cron-format schedule determines when the event fires. Supports standard cron syntax plus human-readable aliases.</p>
-                    </div>
-                    <div class="concept-card">
-                        <h4>Skills Integration</h4>
-                        <p>Events can reference Agent Skills (local or global) to compose complex workflows from reusable components.</p>
-                    </div>
-                    <div class="concept-card">
-                        <h4>Instruction</h4>
-                        <p>Natural language instructions tell the agent what to do when the event fires - no code required.</p>
-                    </div>
-                    <div class="concept-card">
-                        <h4>State & Context</h4>
-                        <p>Events can maintain state between runs, access execution history, and adapt based on previous outcomes.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="section section-gray" id="event-types">
             <div class="container">
                 <h2>Event Types & Trigger Mechanisms</h2>
                 <p class="section-intro">Every event answers a fundamental question: <em>"When should it be worth considering an action?"</em> Time-based scheduling is one answer, but Agent Events supports multiple trigger mechanisms to enable sophisticated automation patterns.</p>
                 
                 <div class="event-types">
-                    <div class="event-type-card">
-                        <h3>1. Time-Based Events</h3>
-                        <p><strong>Trigger:</strong> Scheduled time intervals</p>
-                        <p>Deterministic execution based on cron expressions or natural language schedules. Ideal for recurring tasks with predictable timing requirements.</p>
-                        <div class="code-block">
-                            <pre><code>type: scheduled
+                    <div class="event-type-card collapsible">
+                        <div class="event-type-header" onclick="toggleEventType(this)">
+                            <h3>1. Time-Based Events</h3>
+                            <p><strong>Trigger:</strong> Scheduled time intervals</p>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="event-type-content">
+                            <p>Deterministic execution based on cron expressions or natural language schedules. Ideal for recurring tasks with predictable timing requirements.</p>
+                            <div class="code-block">
+                                <pre><code>type: scheduled
 schedule: "0 9 * * MON-FRI"</code></pre>
+                            </div>
+                            <p class="event-use-case"><strong>Use cases:</strong> Daily reports, periodic health checks, scheduled reminders</p>
                         </div>
-                        <p class="event-use-case"><strong>Use cases:</strong> Daily reports, periodic health checks, scheduled reminders</p>
                     </div>
 
-                    <div class="event-type-card">
-                        <h3>2. Manual Events</h3>
-                        <p><strong>Trigger:</strong> Explicit user invocation</p>
-                        <p>Human-initiated execution through chat interface, API calls, or UI interactions. Enables on-demand workflow execution and event testing without waiting for scheduled triggers.</p>
-                        <div class="code-block">
-                            <pre><code>type: manual
+                    <div class="event-type-card collapsible">
+                        <div class="event-type-header" onclick="toggleEventType(this)">
+                            <h3>2. Manual Events</h3>
+                            <p><strong>Trigger:</strong> Explicit user invocation</p>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="event-type-content">
+                            <p>Human-initiated execution through chat interface, API calls, or UI interactions. Enables on-demand workflow execution and event testing without waiting for scheduled triggers.</p>
+                            <div class="code-block">
+                                <pre><code>type: manual
 description: Execute on explicit user request</code></pre>
+                            </div>
+                            <p class="event-use-case"><strong>Use cases:</strong> One-off reports, testing workflows, user-initiated actions</p>
                         </div>
-                        <p class="event-use-case"><strong>Use cases:</strong> One-off reports, testing workflows, user-initiated actions</p>
                     </div>
 
-                    <div class="event-type-card">
-                        <h3>3. Event-Triggered Events</h3>
-                        <p><strong>Trigger:</strong> Completion of another event</p>
-                        <p>Reactive execution based on internal event bus signals. Enables event chaining and sequential workflow composition without complex orchestration logic.</p>
-                        <div class="code-block">
-                            <pre><code>type: event-triggered
+                    <div class="event-type-card collapsible">
+                        <div class="event-type-header" onclick="toggleEventType(this)">
+                            <h3>3. Event-Triggered Events</h3>
+                            <p><strong>Trigger:</strong> Completion of another event</p>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="event-type-content">
+                            <p>Reactive execution based on internal event bus signals. Enables event chaining and sequential workflow composition without complex orchestration logic.</p>
+                            <div class="code-block">
+                                <pre><code>type: event-triggered
 on:
   event: daily-report-complete</code></pre>
+                            </div>
+                            <p class="event-use-case"><strong>Use cases:</strong> Post-processing pipelines, notification chains, dependent workflows</p>
                         </div>
-                        <p class="event-use-case"><strong>Use cases:</strong> Post-processing pipelines, notification chains, dependent workflows</p>
                     </div>
 
-                    <div class="event-type-card">
-                        <h3>4. State-Change Events</h3>
-                        <p><strong>Trigger:</strong> Observable state threshold crossing</p>
-                        <p>Condition-based execution when monitored metrics or state variables cross defined thresholds. Enables proactive monitoring and anomaly detection.</p>
-                        <div class="code-block">
-                            <pre><code>type: state-change
+                    <div class="event-type-card collapsible">
+                        <div class="event-type-header" onclick="toggleEventType(this)">
+                            <h3>4. State-Change Events</h3>
+                            <p><strong>Trigger:</strong> Observable state threshold crossing</p>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="event-type-content">
+                            <p>Condition-based execution when monitored metrics or state variables cross defined thresholds. Enables proactive monitoring and anomaly detection.</p>
+                            <div class="code-block">
+                                <pre><code>type: state-change
 condition:
   metric: disk_usage_percent
   operator: ">"
   value: 80</code></pre>
+                            </div>
+                            <p class="event-use-case"><strong>Use cases:</strong> Resource alerts, threshold monitoring, anomaly detection</p>
                         </div>
-                        <p class="event-use-case"><strong>Use cases:</strong> Resource alerts, threshold monitoring, anomaly detection</p>
                     </div>
 
-                    <div class="event-type-card">
-                        <h3>5. External Signal Events</h3>
-                        <p><strong>Trigger:</strong> Webhooks, API callbacks, MCP server signals</p>
-                        <p>Integration with external systems through webhooks, Model Context Protocol (MCP) servers, or third-party API notifications. Enables real-time response to external state changes.</p>
-                        <div class="code-block">
-                            <pre><code>type: external
+                    <div class="event-type-card collapsible">
+                        <div class="event-type-header" onclick="toggleEventType(this)">
+                            <h3>5. External Signal Events</h3>
+                            <p><strong>Trigger:</strong> Webhooks, API callbacks, MCP server signals</p>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="event-type-content">
+                            <p>Integration with external systems through webhooks, Model Context Protocol (MCP) servers, or third-party API notifications. Enables real-time response to external state changes.</p>
+                            <div class="code-block">
+                                <pre><code>type: external
 source: github.webhook
 filter:
   event_type: pull_request</code></pre>
+                            </div>
+                            <p class="event-use-case"><strong>Use cases:</strong> CI/CD integration, third-party notifications, real-time system updates</p>
                         </div>
-                        <p class="event-use-case"><strong>Use cases:</strong> CI/CD integration, third-party notifications, real-time system updates</p>
                     </div>
 
-                    <div class="event-type-card">
-                        <h3>6. User-Activity Events</h3>
-                        <p><strong>Trigger:</strong> User presence, behavior, or interaction patterns</p>
-                        <p>Execution based on user actions, presence detection, or interaction history. Creates responsive, context-aware automation that adapts to user behavior.</p>
-                        <div class="code-block">
-                            <pre><code>type: user-activity
+                    <div class="event-type-card collapsible">
+                        <div class="event-type-header" onclick="toggleEventType(this)">
+                            <h3>6. User-Activity Events</h3>
+                            <p><strong>Trigger:</strong> User presence, behavior, or interaction patterns</p>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="event-type-content">
+                            <p>Execution based on user actions, presence detection, or interaction history. Creates responsive, context-aware automation that adapts to user behavior.</p>
+                            <div class="code-block">
+                                <pre><code>type: user-activity
 user: specified_user
 activity: session_start</code></pre>
+                            </div>
+                            <p class="event-use-case"><strong>Use cases:</strong> Personalized greetings, activity-based reminders, user-context automation</p>
                         </div>
-                        <p class="event-use-case"><strong>Use cases:</strong> Personalized greetings, activity-based reminders, user-context automation</p>
                     </div>
 
-                    <div class="event-type-card">
-                        <h3>7. Absence Events</h3>
-                        <p><strong>Trigger:</strong> Expected signal or event does not occur</p>
-                        <p>Proactive detection of missing signals or non-occurrence of expected events within specified time windows. Transforms passive monitoring into proactive anomaly detection.</p>
-                        <div class="code-block">
-                            <pre><code>type: absence
+                    <div class="event-type-card collapsible">
+                        <div class="event-type-header" onclick="toggleEventType(this)">
+                            <h3>7. Absence Events</h3>
+                            <p><strong>Trigger:</strong> Expected signal or event does not occur</p>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="event-type-content">
+                            <p>Proactive detection of missing signals or non-occurrence of expected events within specified time windows. Transforms passive monitoring into proactive anomaly detection.</p>
+                            <div class="code-block">
+                                <pre><code>type: absence
 watch:
   event: expected-status-update
   within: 1 hour</code></pre>
+                            </div>
+                            <p class="event-use-case"><strong>Use cases:</strong> Dead-man switches, SLA monitoring, missing data detection</p>
                         </div>
-                        <p class="event-use-case"><strong>Use cases:</strong> Dead-man switches, SLA monitoring, missing data detection</p>
                     </div>
 
-                    <div class="event-type-card">
-                        <h3>8. Composite Events</h3>
-                        <p><strong>Trigger:</strong> Multiple conditions satisfied simultaneously</p>
-                        <p>Complex event correlation combining multiple trigger types with logical operators. Enables sophisticated automation patterns requiring multi-factor condition evaluation.</p>
-                        <div class="code-block">
-                            <pre><code>type: composite
+                    <div class="event-type-card collapsible">
+                        <div class="event-type-header" onclick="toggleEventType(this)">
+                            <h3>8. Composite Events</h3>
+                            <p><strong>Trigger:</strong> Multiple conditions satisfied simultaneously</p>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="event-type-content">
+                            <p>Complex event correlation combining multiple trigger types with logical operators. Enables sophisticated automation patterns requiring multi-factor condition evaluation.</p>
+                            <div class="code-block">
+                                <pre><code>type: composite
 all:
   - event: daily-report-complete
   - condition:
       metric: error_count
       operator: ">"
       value: 0</code></pre>
+                            </div>
+                            <p class="event-use-case"><strong>Use cases:</strong> Multi-condition alerts, complex workflow triggers, correlated event processing</p>
                         </div>
-                        <p class="event-use-case"><strong>Use cases:</strong> Multi-condition alerts, complex workflow triggers, correlated event processing</p>
                     </div>
                 </div>
 
@@ -319,6 +316,83 @@ all:
                     <a href="https://github.com/HadjievK/event-driven-agent" target="_blank" class="button button-primary">
                         View Full Example Repository
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="specification" class="section">
+            <div class="container">
+                <h2>Specification</h2>
+                <p class="section-intro">This document defines the Agent Events format.</p>
+
+                <h3>Directory Structure</h3>
+                <p>An event is a directory containing at minimum an EVENT.md file:</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Minimum event structure</span>
+                    </div>
+                    <pre><code>event-name/
+└── EVENT.md          # Required</code></pre>
+                </div>
+                <p style="margin-top: 1rem;">You can optionally include additional directories such as <code>scripts/</code>, <code>references/</code>, <code>skills/</code> and <code>assets/</code> to support your events.</p>
+
+                <h3 style="margin-top: 2.5rem;">EVENT.md Format</h3>
+                <p>The EVENT.md file must contain YAML frontmatter followed by Markdown content.</p>
+
+                <h4 style="margin-top: 1.5rem; font-size: 1.1rem; font-weight: 600;">Frontmatter (required)</h4>
+                <div class="code-block">
+                    <pre><code>---
+name: event-name
+description: A description of the event, its purpose and when it should be triggered.
+---</code></pre>
+                </div>
+
+                <h4 style="margin-top: 1.5rem; font-size: 1.1rem; font-weight: 600;">Body Content</h4>
+                <p>The Markdown body after the frontmatter contains the event instructions. There are no format restrictions.</p>
+                <p style="margin-top: 0.5rem;"><strong>Recommended sections:</strong></p>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li>Step-by-step instructions</li>
+                    <li>Examples of inputs and outputs</li>
+                    <li>Common edge cases</li>
+                </ul>
+
+                <h3 style="margin-top: 2.5rem;">Optional Directories</h3>
+                
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;"><code>scripts/</code></h4>
+                    <p>Contains executable code that agents can run. Scripts should:</p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Be self-contained or clearly document dependencies</li>
+                        <li>Include helpful error messages</li>
+                        <li>Handle edge cases gracefully</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem; font-style: italic; color: var(--color-text-light);">Supported languages depend on the agent implementation. Common options include Python, Bash, and JavaScript.</p>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;"><code>references/</code></h4>
+                    <p>Contains additional documentation that agents can read when needed:</p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>REFERENCE.md</strong> - Detailed technical reference</li>
+                        <li><strong>FORMS.md</strong> - Form templates or structured data formats</li>
+                        <li>Domain-specific files (finance.md, legal.md, etc.)</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem; font-style: italic; color: var(--color-text-light);">Keep individual reference files focused. Agents load these on demand, so smaller files mean less use of context.</p>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;"><code>skills/</code></h4>
+                    <p>Contains a specific skill or skills that can be used when the event happens.</p>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;"><code>assets/</code></h4>
+                    <p>Contains static resources:</p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Templates (document templates, configuration templates)</li>
+                        <li>Images (diagrams, examples)</li>
+                        <li>Data files (lookup tables, schemas)</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -431,5 +505,57 @@ all:
             </div>
         </div>
     </footer>
+    <script>
+        function toggleEventType(header) {
+            const card = header.parentElement;
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            card.classList.toggle('expanded');
+            
+            if (card.classList.contains('expanded')) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.textContent = '▲';
+            } else {
+                content.style.maxHeight = '0';
+                icon.textContent = '▼';
+            }
+        }
+    </script>
+    <style>
+        .event-type-card.collapsible {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .event-type-header {
+            position: relative;
+            padding-right: 2rem;
+        }
+        
+        .toggle-icon {
+            position: absolute;
+            top: 1rem;
+            right: 0;
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .event-type-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .event-type-card.collapsible.expanded .event-type-content {
+            padding-top: 0.5rem;
+        }
+        
+        .event-type-card.collapsible:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </body>
 </html>
