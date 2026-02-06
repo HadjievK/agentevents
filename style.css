@@ -528,8 +528,15 @@ footer {
 /* Event Types Section */
 .event-types {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .event-types {
+        grid-template-columns: 1fr;
+    }
 }
 
 .event-type-card {
