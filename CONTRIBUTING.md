@@ -13,23 +13,60 @@ Share your event definitions to inspire others:
 git clone https://github.com/HadjievK/agentevents.git
 cd agentevents
 
-# Create new event
-mkdir -p examples/your-event-name
+# Create new event directory structure
+mkdir -p examples/your-event-name/{references,scripts}
 cd examples/your-event-name
 
-# Create event.yaml
-cat > event.yaml << EOF
+# Create EVENT.MD with YAML frontmatter and Markdown content
+cat > EVENT.MD << EOF
+---
 name: your-event-name
 description: What your event does
 schedule: "0 9 * * *"
 enabled: true
+---
 
-skills:
-  - skill-name
+# Your Event Name
 
-instruction: |
-  Clear instructions for what the agent should do
+Event description and overview.
+
+## Event Instructions
+
+Clear instructions for what the agent should do:
+- Step 1
+- Step 2
+- Step 3
+
+## Skills
+
+This event uses the following skills:
+- skill-name
+- another-skill
+
+## Configuration
+
+- **Max retries:** 2
+- **Timeout:** 120 seconds
+
+## Metadata
+
+- **Author:** your-github-username
+- **Version:** 1.0.0
+- **Tags:** tag1, tag2
 EOF
+
+# Add reference files for configuration and templates (optional)
+cat > references/config.md << EOF
+# Configuration Reference
+
+## Settings
+
+- Key: Description
+- Key: Description
+EOF
+
+# Add scripts for helper functions (optional)
+# mkdir scripts
 
 # Commit and push
 git add .
@@ -37,11 +74,23 @@ git commit -m "Add example: your-event-name"
 git push origin main
 ```
 
+**Event directory structure:**
+```
+examples/your-event-name/
+├── EVENT.MD              # Event definition (required)
+├── references/           # Optional: configuration, templates, data files
+│   ├── config.md
+│   └── template.md
+└── scripts/              # Optional: bundled helper scripts
+```
+
 **Good example events:**
 - Solve a common problem
 - Have clear, specific instructions
 - Use standard skills where possible
-- Include documentation in README.md
+- Include templates and configuration in references/
+- Add helper scripts in scripts/ if needed
+- Follow the EVENT.MD format with YAML frontmatter
 
 ### 2. Build Skills
 
@@ -318,49 +367,79 @@ Then create Pull Request on GitHub with:
 ### Clear Instructions
 
 **Good:**
-```yaml
-instruction: |
-  Check the production API health endpoint every 5 minutes.
-  If response time > 500ms or status != 200:
-  - Create PagerDuty incident with P2 priority
-  - Include endpoint URL, response time, and status code
-  - Tag with "performance" label
+```markdown
+## Event Instructions
+
+Check the production API health endpoint every 5 minutes.
+If response time > 500ms or status != 200:
+- Create PagerDuty incident with P2 priority
+- Include endpoint URL, response time, and status code
+- Tag with "performance" label
 ```
 
 **Bad:**
-```yaml
-instruction: |
-  Monitor the API and alert if there are problems
+```markdown
+## Event Instructions
+
+Monitor the API and alert if there are problems
 ```
 
 ### Specific Schedules
 
 **Good:**
-```yaml
+```markdown
+---
+name: api-health-check
+description: Monitor API health and alert on degradation
 schedule: "*/5 * * * *"  # Every 5 minutes
-# or
+enabled: true
+---
+```
+or
+```markdown
 schedule: "0 9 * * MON-FRI"  # Weekdays at 9 AM
 ```
 
 **Bad:**
-```yaml
+```markdown
 schedule: "* * * * *"  # Every minute (too frequent)
 ```
 
 ### Skill References
 
 **Good:**
-```yaml
-skills:
-  - api-monitoring       # Clear capability
-  - pagerduty-alert      # Specific integration
+```markdown
+## Skills
+
+This event uses the following skills:
+- api-monitoring       # Clear capability
+- pagerduty-alert      # Specific integration
 ```
 
 **Bad:**
-```yaml
-skills:
-  - general-helper       # Too vague
-  - do-stuff             # Unclear purpose
+```markdown
+## Skills
+
+This event uses the following skills:
+- general-helper       # Too vague
+- do-stuff             # Unclear purpose
+```
+
+### Well-Organized References
+
+**Good reference files:**
+- `alert-thresholds.md` - Configuration values with explanations
+- `email-template.md` - HTML/text templates with variable placeholders
+- `team-structure.md` - Team members, contacts, escalation paths
+- `runbook.md` - Troubleshooting procedures and remediation steps
+
+**Example references structure:**
+```
+references/
+├── alert-thresholds.md
+├── team-members.md
+├── mail-template.md
+└── runbook.md
 ```
 
 ## Skill Best Practices
